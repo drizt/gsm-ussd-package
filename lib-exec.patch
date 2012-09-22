@@ -1,0 +1,24 @@
+diff --git a/Makefile b/Makefile
+index 2d21eac..a2ac1c0 100644
+--- a/Makefile
++++ b/Makefile
+@@ -9,7 +9,7 @@ PREFIX		= /usr/local
+ INSTALL_PATH	= $(PREFIX)
+ BIN_PATH	= $(INSTALL_PATH)/bin
+ MAN_PATH	= $(INSTALL_PATH)/share/man
+-LIB_PATH	= $(INSTALL_PATH)/lib/gsm-ussd
++LIB_PATH	= $(INSTALL_PATH)/libexec/gsm-ussd
+ 
+ # The documentation in POD and *roff format
+ PODS		= docs/gsm-ussd.en.pod docs/gsm-ussd.de.pod docs/xussd.en.pod docs/xussd.de.pod
+@@ -27,8 +27,8 @@ install:	all
+ 	install lib/GSMUSSD/* $(LIB_PATH)/lib/GSMUSSD
+ 	install bin/gsm-ussd.pl $(LIB_PATH)/bin
+ 	install bin/xussd.sh $(LIB_PATH)/bin
+-	cd $(BIN_PATH) && ln -sf ../lib/gsm-ussd/bin/gsm-ussd.pl gsm-ussd
+-	cd $(BIN_PATH) && ln -sf ../lib/gsm-ussd/bin/xussd.sh xussd
++	cd $(BIN_PATH) && ln -sf ../libexec/gsm-ussd/bin/gsm-ussd.pl gsm-ussd
++	cd $(BIN_PATH) && ln -sf ../libexec/gsm-ussd/bin/xussd.sh xussd
+ 
+ doc:	$(MANS)
+ 
