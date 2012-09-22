@@ -1,17 +1,19 @@
-%define rev 25
+%global rev 25
 Name:           gsm-ussd
 Group:          Applications/Communications
 Version:        0.4.0
-Release:        0.1.%{rev}%{?dist}
+Release:        0.2.%{rev}%{?dist}
 Source:         http://linux.zum-quadrat.de/downloads/%{name}_%{version}-%{rev}.tar.gz
 BuildArch:      noarch 
 Summary:        USSD query tool
 
-License:        GPLv2
+License:        GPLv2+
 Url:            http://iloapp.zum-quadrat.de/blog/linux?Home&category=2
 Requires:       perl-Expect
 
-Patch0:         lib-exec.patch
+# Makefile installs python scripts to lib dir. It's wrong.
+# Patch serves to fix it.
+Patch0:         gsm-ussd-libexec.patch
 
 %description
 gsm-ussd is a script to send USSD (Unstructured Supplementary
@@ -35,14 +37,19 @@ make PREFIX=$RPM_BUILD_ROOT/usr install install-doc
 chmod 644 $RPM_BUILD_ROOT%{_mandir}/man1/* $RPM_BUILD_ROOT%{_mandir}/de/man1/*
 
 %files
-%defattr(-,root,root,-)
 %doc README LICENSE TODO docs/README.* docs/story.txt docs/ussd-sessions.txt
 %doc %{_mandir}/man1/*
 %doc %{_mandir}/de/man1/*
-%{_libexecdir}/gsm-ussd/*
-%{_bindir}/gsm-ussd
+%{_libexecdir}/%{name}/*
+%{_bindir}/%{name}
 %{_bindir}/xussd
 
 %changelog
+* Sat Sep 22 2012 Ivan Romanov <drizt@land.ru> 0.4.0-0.2.25
+- renamed lib-exec.patch -> gsm-ussd-libexec.patch
+- dropped %%defattr
+- corrected license
+- use %%gloabal instead of %%define
+
 * Sun Sep 16 2012 Ivan Romanov <drizt@land.ru> 0.4.0-0.1.25
 - Initial version of package based on spec.tmpl from source tarball
