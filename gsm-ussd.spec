@@ -1,4 +1,6 @@
 %define __provides_exclude_from %{_libexecdir}
+%define __requires_exclude .*GSMUSSD.*
+
 %global rev 25
 Name:           gsm-ussd
 Group:          Applications/Communications
