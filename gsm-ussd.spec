@@ -7,9 +7,10 @@ Source:         http://linux.zum-quadrat.de/downloads/%{name}_%{version}-%{rev}.
 BuildArch:      noarch 
 Summary:        USSD query tool
 
-License:        GPLv2+
+License:        GPLv2+ or LGPLv2+
 Url:            http://iloapp.zum-quadrat.de/blog/linux?Home&category=2
-Requires:       perl-Expect
+Requires:       perl(:MODULE_COMPAT_%(eval "`perl -V:version`"; echo $version))
+Requires:       perl(Expect)
 
 # Makefile installs python scripts to lib dir. It's wrong.
 # Patch serves to fix it.
@@ -55,6 +56,8 @@ rm $RPM_BUILD_ROOT%{_mandir}/de/man1/xussd*
 * Sun Oct 07 2012 Ivan Romanov <drizt@land.ru> 0.4.0-0.3.25
 - dropped xussd
 - unset executable flag for perl modules
+- fixed License tag
+- fixed Requires tag
 
 * Sat Sep 22 2012 Ivan Romanov <drizt@land.ru> 0.4.0-0.2.25
 - renamed lib-exec.patch -> gsm-ussd-libexec.patch
