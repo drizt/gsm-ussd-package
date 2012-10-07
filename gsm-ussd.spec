@@ -2,7 +2,7 @@
 Name:           gsm-ussd
 Group:          Applications/Communications
 Version:        0.4.0
-Release:        0.2.%{rev}%{?dist}
+Release:        0.3.%{rev}%{?dist}
 Source:         http://linux.zum-quadrat.de/downloads/%{name}_%{version}-%{rev}.tar.gz
 BuildArch:      noarch 
 Summary:        USSD query tool
@@ -35,16 +35,27 @@ and so on, depending on your GSM provider.
 make PREFIX=$RPM_BUILD_ROOT/usr install install-doc
 # Unset executable bit
 chmod 644 $RPM_BUILD_ROOT%{_mandir}/man1/* $RPM_BUILD_ROOT%{_mandir}/de/man1/*
+chmod 644 $RPM_BUILD_ROOT%{_libexecdir}/%{name}/lib/GSMUSSD/*
+
+# gsm-ussd has gui but it depends from KDE and Gnome.
+# So I've droped it to prevent many dependencies.
+rm $RPM_BUILD_ROOT%{_bindir}/xussd
+rm $RPM_BUILD_ROOT%{_libexecdir}/%{name}/bin/xussd.sh
+rm $RPM_BUILD_ROOT%{_mandir}/man1/xussd*
+rm $RPM_BUILD_ROOT%{_mandir}/de/man1/xussd*
 
 %files
 %doc README LICENSE TODO docs/README.* docs/story.txt docs/ussd-sessions.txt
 %doc %{_mandir}/man1/*
 %doc %{_mandir}/de/man1/*
-%{_libexecdir}/%{name}/*
+%{_libexecdir}/%{name}/
 %{_bindir}/%{name}
-%{_bindir}/xussd
 
 %changelog
+* Sun Oct 07 2012 Ivan Romanov <drizt@land.ru> 0.4.0-0.3.25
+- dropped xussd
+- unset executable flag for perl modules
+
 * Sat Sep 22 2012 Ivan Romanov <drizt@land.ru> 0.4.0-0.2.25
 - renamed lib-exec.patch -> gsm-ussd-libexec.patch
 - dropped %%defattr
