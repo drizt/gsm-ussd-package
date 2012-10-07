@@ -1,3 +1,4 @@
+%define __provides_exclude_from %{_libexecdir}
 %global rev 25
 Name:           gsm-ussd
 Group:          Applications/Communications
@@ -58,6 +59,7 @@ rm $RPM_BUILD_ROOT%{_mandir}/de/man1/xussd*
 - unset executable flag for perl modules
 - fixed License tag
 - fixed Requires tag
+- filter modules from Provides
 
 * Sat Sep 22 2012 Ivan Romanov <drizt@land.ru> 0.4.0-0.2.25
 - renamed lib-exec.patch -> gsm-ussd-libexec.patch
